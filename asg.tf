@@ -8,6 +8,11 @@ resource "aws_launch_template" "launch-template" {
     name = aws_iam_instance_profile.instance_profile.name
   }
 
+  instance_market_options {
+    market_type = "spot"
+  }
+
+
   user_data = base64encode(templatefile("${path.module}/ansible-pull.sh", {
     COMPONENT = var.name
     ENV       = var.env
